@@ -4,16 +4,16 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/cosmos/cosmos-sdk/client"
-
 	"github.com/spf13/cobra"
 
+	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/context"
+	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/version"
 	"github.com/cosmos/modules/incubator/nft/exported"
-	"github.com/cosmos/modules/incubator/nft/internal/types"
+	"github.com/cosmos/modules/incubator/nft/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module
@@ -21,9 +21,10 @@ func GetQueryCmd(queryRoute string, cdc *codec.Codec) *cobra.Command {
 	nftQueryCmd := &cobra.Command{
 		Use:   types.ModuleName,
 		Short: "Querying commands for the NFT module",
+		RunE:  client.ValidateCmd,
 	}
 
-	nftQueryCmd.AddCommand(client.GetCommands(
+	nftQueryCmd.AddCommand(flags.GetCommands(
 		GetCmdQueryCollectionSupply(queryRoute, cdc),
 		GetCmdQueryOwner(queryRoute, cdc),
 		GetCmdQueryCollection(queryRoute, cdc),
