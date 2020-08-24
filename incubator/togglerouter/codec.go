@@ -1,13 +1,11 @@
-package addsigners
+package togglerouter
 
 import (
 	"github.com/cosmos/cosmos-sdk/codec"
 )
 
 // Register concrete types on codec codec
-func RegisterCodec(cdc *codec.Codec) {
-	cdc.RegisterConcrete(MsgAddSigners{}, "cosmos-sdk/MsgAddSigners", nil)
-}
+func RegisterCodec(cdc *codec.Codec) {}
 
 // module codec
 var ModuleCdc *codec.Codec
